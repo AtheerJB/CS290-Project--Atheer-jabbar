@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riyadh Metro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .logo {
+            position: fixed;
+            top: 0px;
+            left: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: rgb(249, 248, 248);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            width: 100%;
+            padding: 5px 0;
+            position: relative;
+        }
+        .navbar a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-image: url('home.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .banner h1 {
+            font-size: 36px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .content {
+            padding: 50px;
+            text-align: center;
+        }
+        .footer a {
+            color: #f7f9fc;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 1300px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: 700px;
+            min-height: 400px;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+        .card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            width: 100%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            position: relative;
+            text-align: center;
+        }
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        .modal-content img {
+            width: 50px; 
+            margin-bottom: 10px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .modal-content button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .modal-content button:hover {
+            background-color: #0056b3;
+        }
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #007BFF;
+        }
+        .toggle-link {
+            cursor: pointer;
+            color: #007BFF;
+            text-decoration: underline;
+        }
+        .notification {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 200;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="navbar">
+        <div class="logo">Riyadh Metro</div>
+        <a href="index.html">Home</a>
+        <a href="About.html">About</a>
+        <a href="ticket_booking.html">Ticket Booking</a>
+        <a href="lines.html">Lines</a>
+        <a href="contact.html">Contact</a>
+        <a href="Purchase History.html">Purchase History</a> 
+        <a href="#" id="loginBtn">Login</a>
+    </div>
+
+    <div class="banner">
+        <h1>Welcome to Riyadh Metro</h1>
+    </div>
+
+    <div class="content">
+        <div class="cards-container">
+            <div class="card">
+                <img src="king.jpeg" alt="King Salman Launches Riyadh Metro">
+                <h3>King Salman Launches Riyadh Metro</h3>
+                <p>On the occasion of the Riyadh Metro launch, the dream of a futuristic Riyadh takes a major leap.</p>
+                <p>Under the leadership of His Majesty King Salman bin Abdulaziz, Riyadh is witnessing a transformation in public transportation, which will enhance quality of life and elevate commuting across the capital.</p>
+            </div>
+            <div class="card">
+                <img src="kingLine.jpg" alt="Metro lines">
+                <h3>Metro lines</h3>
+                <p>Explore the future of transportation with the Riyadh Metro. With multiple lines connecting key areas, booking your metro tickets online ensures a smooth and easy travel experience across the city.</p>
+                <p>Convenient and fast, the Riyadh Metro brings the future of urban travel to your doorstep.</p>
+            </div>
+        </div>
+    </div>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riyadh Metro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .notification-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .message-box {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transition: transform 0.3s;
+        }
+        .message-box:hover {
+            transform: scale(1.02);
+        }
+        .message-box h2 {
+            color: #ff6600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .message-box h2 i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .message-box p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notification-box">
+        <div class="message-box">
+            <h2><i class="fas fa-fire"></i> Fire Alarm System (FAS) Under Development</h2>
+            <p>The Fire Alarm System (FAS) will be activated soon to ensure public safety within the stations.</p>
+            <p>Thank you for your understanding!</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+    <div class="notification" id="faceIdNotification">Verifying your face...</div>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <h2 id="modalTitle">Log In</h2>
+            <img id="modalImage" src="sig up.png" alt="Login">
+            <div id="loginForm">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="button" onclick="login()">Log In</button>
+                <button class="faceIdButton" onclick="verifyFaceId()" style="display: flex; align-items: center; justify-content: center; border: none; background: #626960; color: white; padding: 10px; border-radius: 5px; width: 100%; cursor: pointer;">
+                    <img src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='utf-8'?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --><svg width='20' height='20' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7 3H5C3.89543 3 3 3.89543 3 5V7' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M17 3H19C20.1046 3 21 3.89543 21 5V7' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M16 8L16 10' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M8 8L8 10' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M9 16C9 16 10 17 12 17C14 17 15 16 15 16' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M12 8L12 13L11 13' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M7 21H5C3.89543 21 3 20.1046 3 19V17' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M17 21H19C20.1046 21 21 20.1046 21 19V17' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>" alt="Face ID" style="margin-right: 5px; vertical-align: middle;">
+                </button>
+                <p class="toggle-link" onclick="toggleForms()">Don't have an account? Sign Up</p>
+            </div>
+            <div id="signupForm" style="display: none;">
+                <input type="text" id="newUsername" placeholder="Username" required>
+                <input type="email" id="newEmail" placeholder="Email" required>
+                <input type="password" id="newPassword" placeholder="Password" required>
+                <button type="button" onclick="signup()">Sign Up</button>
+                <p class="toggle-link" onclick="toggleForms()">Already have an account? Log In</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="privacy.html">Privacy & Security</a> 
+        <p>&copy; 2025 Riyadh Public Transportation</p>
+    </div>
+
+    <script>
+        let users = [];
+
+        function closeAuthModal() {
+            document.getElementById("authModal").style.display = "none";
+        }
+
+        function toggleForms() {
+            const loginForm = document.getElementById("loginForm");
+            const signupForm = document.getElementById("signupForm");
+            const modalImage = document.getElementById("modalImage");
+
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                signupForm.style.display = "none";
+                modalImage.src = "Login.png";
+                document.getElementById("modalTitle").innerText = "Log In";
+            } else {
+                loginForm.style.display = "none";
+                signupForm.style.display = "block";
+                modalImage.src = "sig up.png"; 
+                document.getElementById("modalTitle").innerText = "Sign Up";
+            }
+        }
+
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                alert("Login successful!");
+                closeAuthModal();
+            } else {
+                alert("Invalid email or password.");
+            }
+        }
+
+        function signup() {
+            const username = document.getElementById("newUsername").value;
+            const email = document.getElementById("newEmail").value;
+            const password = document.getElementById("newPassword").value;
+
+            if (users.some(u => u.email === email)) {
+                alert("Email already exists.");
+            } else {
+                users.push({ username, email, password });
+                alert("Sign up successful! You can now log in.");
+                toggleForms();
+            }
+        }
+
+        function verifyFaceId() {
+            const notification = document.getElementById("faceIdNotification");
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+                alert("Face ID verification successful!");
+            }, 3000);
+        }
+
+        document.getElementById("loginBtn").onclick = function() {
+            document.getElementById("authModal").style.display = "flex";
+            showLoginForm();
+        }
+
+        function showLoginForm() {
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("signupForm").style.display = "none";
+            document.getElementById("modalImage").src = "Login.png"; 
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("authModal")) {
+                closeAuthModal();
+            }
+        }
+    </script>
+
+</body>
+</html>
