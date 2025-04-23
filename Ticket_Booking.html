@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0; 
+            background-color: #f0f0f0;
         }
 
         .header {
@@ -17,7 +17,7 @@
             height: 400px;
             background-image: url('metro-banner.jpg');
             background-size: cover;
-            background-position: center; 
+            background-position: center;
             color: rgb(249, 248, 248);
             display: flex;
             justify-content: center;
@@ -28,41 +28,9 @@
         .header h1 {
             font-size: 3em;
             margin: 0;
-            background-color: rgba(0, 0, 0, 0.5); 
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
-        }
-        
-        .logo {
-            position: fixed; 
-            top: 10px; 
-            left: 20px; 
-            font-size: 1.5em; 
-            font-weight: bold; 
-            color: rgb(249, 248, 248); 
-            padding: 10px; 
-            border-radius: 5px; 
-        }
-
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            background-color: #333; 
-            position: absolute; 
-            top: 0; 
-            width: 100%;
-            z-index: 1; 
-        }
-
-        .nav-links a {
-            color: white;
-            padding: 15px;
-            text-decoration: none;
-            transition: background-color 0.3s; 
-        }
-
-        .nav-links a:hover {
-            background-color: #575757; 
         }
 
         .content {
@@ -73,58 +41,75 @@
         .ticket-class {
             margin: 20px;
             display: inline-block;
-            background-color: #fff; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-            width: 200px; 
-            transition: transform 0.3s; 
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .ticket-class:hover {
-            transform: scale(1.05); 
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .ticket-class h3 {
             margin: 0;
-            background-color: #104750; 
-            color: white; 
+            background-color: #104750;
+            color: white;
             padding: 10px;
-            border-top-left-radius: 10px; 
-            border-top-right-radius: 10px; 
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
         }
 
         .ticket-class p {
             padding: 15px;
-            font-size: 1.2em; 
+            font-size: 1.2em;
         }
 
         .ticket-class button {
-            background-color: #333; 
-            color: white; 
+            background-color: #333;
+            color: white;
             border: none;
             padding: 10px 0;
-            width: 100%; 
-            border-bottom-left-radius: 10px; 
-            border-bottom-right-radius: 10px; 
-            cursor: pointer; 
-            transition: background-color 0.3s; 
+            width: 100%;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .ticket-class button:hover {
-            background-color: #575757; 
+            background-color: #575757;
         }
 
-        .modify-btn, .cancel-btn {
-            background-color: #007BFF;
+        .error-message {
+            color: red;
+            margin-top: 20px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff0000;
             color: white;
-            border: none;
-            padding: 5px;
-            margin-top: 5px;
-            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 200;
+            display: none;
+            animation: slideIn 0.5s ease-out;
         }
 
-        .modify-btn:hover, .cancel-btn:hover {
-            background-color: #0056b3;
+        /* Animation for notification */
+        @keyframes slideIn {
+            0% {
+                top: -50px;
+            }
+            100% {
+                top: 20px;
+            }
         }
     </style>
 </head>
@@ -132,21 +117,12 @@
 
     <div class="header">
         <h1>Riyadh Metro Ticket Booking</h1>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="About.html">About</a>
-            <a href="ticket_booking.html">Ticket Booking</a>
-            <a href="Lines.html">Lines</a>
-            <a href="contact.html">Contact</a>
-            <a href="Purchase History.html">Purchase History</a>
-            <div class="logo">Riyadh Metro</div>
-        </div>
     </div>
 
     <div class="content">
         <h2>First-Class:</h2>
         <p>These offer a premium experience with enhanced comfort for a more luxurious travel option.</p>
-        
+
         <div class="ticket-class">
             <h3>SAR 10</h3>
             <p>2-hour pass</p>
@@ -171,70 +147,74 @@
             <button onclick="bookTicket('SAR 350', '31-day pass')">Book Now</button>
         </div>
 
-        <div class="regular-class">
-            <h2>Regular Class:</h2>
-            <p>Affordable options for everyday travel.</p>
+        <h3>Modify Booking Issues</h3>
+        <button onclick="notifyUser('This is a test notification')">Notificat User</button>
+        <button onclick="contactSupport('Technical issue with booking')">Contact Support</button>
 
-            <div class="ticket-class">
-                <h3>SAR 4</h3>
-                <p>2-hour pass</p>
-                <button onclick="bookTicket('SAR 4', '2-hour pass')">Book Now</button>
-            </div>
-
-            <div class="ticket-class">
-                <h3>SAR 20</h3>
-                <p>3-day pass</p>
-                <button onclick="bookTicket('SAR 20', '3-day pass')">Book Now</button>
-            </div>
-
-            <div class="ticket-class">
-                <h3>SAR 40</h3>
-                <p>7-day pass</p>
-                <button onclick="bookTicket('SAR 40', '7-day pass')">Book Now</button>
-            </div>
-
-            <div class="ticket-class">
-                <h3>SAR 140</h3>
-                <p>30-day pass</p>
-                <button onclick="bookTicket('SAR 140', '30-day pass')">Book Now</button>
-            </div>
-        </div>
+        <div id="error-message" class="error-message"></div>
+        <div id="notification" class="notification"></div>
+        <div id="output"></div>
     </div>
-
     <script>
-    function bookTicket(price, type) {
-        const confirmation = confirm(`You are about to book a ${type} for ${price}. Do you want to proceed with the payment now?`);
-        if (confirmation) {
-            const purchaseHistory = JSON.parse(localStorage.getItem('purchaseHistory')) || [];
-            const ticketId = Date.now(); 
-            purchaseHistory.push({ id: ticketId, price, type, date: new Date().toLocaleString('en-US', { timeZone: 'Asia/Riyadh' }) });
-            localStorage.setItem('purchaseHistory', JSON.stringify(purchaseHistory));
-            window.location.href = 'payment.html'; 
-        } else {
-            alert('Booking saved! You can view your purchase history later.');
+        const bookings = {}; // Modify Booking issues
+    
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById("notification");
+            notification.innerText = message;
+            notification.style.backgroundColor = type === 'error' ? 'red' : '#007BFF'; // Red for errors
+            notification.style.display = 'block';
+    
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
         }
-    }
-
-    function modifyTicket(index) {
-        const ticketList = JSON.parse(localStorage.getItem('purchaseHistory')) || [];
-        const ticket = ticketList[index];
-        const newPrice = prompt("Enter new price:", ticket.price);
-        const newType = prompt("Enter new type:", ticket.type);
-
-        if (newPrice && newType) {
-            ticketList[index] = { ...ticket, price: newPrice, type: newType };
-            localStorage.setItem('purchaseHistory', JSON.stringify(ticketList));
-            loadPurchaseHistory(); 
+    
+        // Function to handle booking cancellation
+        function cancelBooking() {
+            if (Object.keys(bookings).length > 0) {
+                const lastBooking = Object.keys(bookings).pop();
+                delete bookings[lastBooking];
+                console.log("Booking cancelled:", lastBooking);
+                showNotification(`Booking cancelled: ${lastBooking}`);
+            } else {
+                console.log("No bookings to cancel!");
+                showNotification("No bookings to cancel!");
+            }
         }
-    }
-
-    function cancelTicket(index) {
-        const ticketList = JSON.parse(localStorage.getItem('purchaseHistory')) || [];
-        ticketList.splice(index, 1); 
-        localStorage.setItem('purchaseHistory', JSON.stringify(ticketList));
-        loadPurchaseHistory(); 
-    }
+    
+        // Function to contact support
+        function contactSupport(issue) {
+            console.log(`Support contacted with issue: ${issue}`);
+            showNotification(`Support contacted: ${issue}`, 'error'); // Red notification for support
+            alert(`Your issue: "${issue}" has been submitted to support. We will respond shortly.`);
+        }
+    
+        // Function for booking ticket
+        function bookTicket(price, type) {
+            const confirmation = confirm(`You are about to book a ${type} for ${price}. Do you want to proceed?`);
+            if (confirmation) {
+                try {
+                    if (Math.random() < 0.2) {
+                        throw new Error("Booking failed due to a technical issue.");
+                    }
+    
+                    const bookingDetails = `${type} - ${price}`;
+                    console.log("Booking successful:", bookingDetails);  // Success message in console
+                    document.getElementById("output").innerHTML = `Booking Successful: ${bookingDetails}`;
+                } catch (error) {
+                    console.error("Error during booking:", error.message);  // Error message in console
+                    document.getElementById("output").innerHTML = `Error: ${error.message}`;
+                    document.getElementById("error-message").innerHTML = `Error: ${error.message}`;  // Show error message
+                    showNotification("There was a problem with your booking. Please try again.", 'error');
+                }
+            } else {
+                console.log("Booking was cancelled by the user.");
+                document.getElementById("output").innerHTML = 'Booking cancelled. You can book anytime later.';
+            }
+        }
     </script>
-
+    
 </body>
 </html>
