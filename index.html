@@ -313,6 +313,43 @@
             }
         }
     </script>
+<script>
+  function add(a, b) {
+    return a + b;
+  }
+
+  // Functional Tests
+  function runTests() {
+    const results = [];
+
+    // Sample test cases
+    if (add(2, 3) === 5) {
+      console.log("✅ PASS: add(2, 3) == 5");
+      results.push(true);
+    } else {
+      console.log("❌ FAIL: add(2, 3) != 5");
+      results.push(false);
+    }
+
+    if (add(0, 0) === 0) {
+      console.log("✅ PASS: add(0, 0) == 0");
+      results.push(true);
+    } else {
+      console.log("❌ FAIL: add(0, 0) != 0");
+      results.push(false);
+    }
+
+    // Summary
+    if (results.every(r => r)) {
+      console.log("✅✅✅ ALL TESTS PASSED");
+    } else {
+      console.log("❌❌❌ SOME TESTS FAILED");
+      process.exit(1); // force GitHub Actions to mark it as failed
+    }
+  }
+
+  runTests();
+</script>
 
 </body>
 </html>
