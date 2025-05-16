@@ -104,13 +104,69 @@
             }
         });
     </script>
+    
+<script id="test-script">
+  // Mock localStorage
+  global.localStorage = {
+    store: {},
+    setItem(key, value) { this.store[key] = value },
+    getItem(key) { return this.store[key] || null },
+    removeItem(key) { delete this.store[key] },
+    clear() { this.store = {} }
+  };
 
-    <script id="test-script">
-  function testContactPage() {
-    console.log("✅ PASS: contact page logic runs");
+  const testResults = [];
+
+  // === System Code to Test ===
+  function signup(username, email, password, phone) {
+    if (localStorage.getItem(email)) {
+      return "Email already exists.";
+    } else {
+      localStorage.setItem(email, JSON.stringify({ username, email, password, phone }));
+      return "Signup successful!";
+    }
   }
-  testContactPage();
+
+  function login(email, password) {
+    const user = JSON.parse(localStorage.getItem(email));
+    if (user && user.password === password) {
+      return "Login successful!";
+    } else {
+      return "Invalid email or password.";
+    }
+  }
+
+  // === TEST CASES ===
+  function runTests() {
+    localStorage.clear();
+
+    function assert(condition, description) {
+      if (condition) {
+        console.log(`✅ ${description}`);
+        testResults.push(true);
+      } else {
+        console.log(`❌ ${description}`);
+        testResults.push(false);
+      }
+    }
+
+    assert(signup("Atheer", "atheer@example.com", "123", "0500000000") === "Signup successful!", "Signup with new user");
+    assert(login("atheer@example.com", "123") === "Login successful!", "Login with correct credentials");
+    assert(login("atheer@example.com", "wrong") === "Invalid email or password.", "Login with incorrect password");
+    assert(signup("Another", "atheer@example.com", "456", "0501111111") === "Email already exists.", "Duplicate signup detection");
+
+    // Summary
+    if (testResults.every(Boolean)) {
+      console.log("✅✅✅ ALL FUNCTIONAL TESTS PASSED");
+    } else {
+      console.log("❌❌❌ SOME FUNCTIONAL TESTS FAILED");
+      process.exit(1); // tell GitHub Actions to fail
+    }
+  }
+
+  runTests();
 </script>
+
 
 </body>
 </html>
