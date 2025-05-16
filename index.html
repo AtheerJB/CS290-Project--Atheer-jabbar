@@ -314,39 +314,53 @@
         }
     </script>
 <script id="test-script">
-  // Node.js-compatible test code
-  function add(a, b) {
-    return a + b;
+  // Mock localStorage
+  global.localStorage = {
+    store: {},
+    setItem(key, value) { this.store[key] = value },
+    getItem(key) { return this.store[key] || null },
+    removeItem(key) { delete this.store[key] },
+    clear() { this.store = {} }
+  };
+
+  const testResults = [];
+
+  // === System Code to Test ===
+  function signup(username, email, password, phone) {
+    if (localStorage.getItem(email)) {
+      return "Email already exists.";
+    } else {
+      localStorage.setItem(email, JSON.stringify({ username, email, password, phone }));
+      return "Signup successful!";
+    }
   }
 
+  function login(email, password) {
+    const user = JSON.parse(localStorage.getItem(email));
+    if (user && user.password === password) {
+      return "Login successful!";
+    } else {
+      return "Invalid email or password.";
+    }
+  }
+
+  // === TEST CASES ===
   function runTests() {
-    const results = [];
+    localStorage.clear();
 
-    if (add(2, 3) === 5) {
-      console.log("✅ PASS: add(2, 3) == 5");
-      results.push(true);
-    } else {
-      console.log("❌ FAIL: add(2, 3) != 5");
-      results.push(false);
+    function assert(condition, description) {
+      if (condition) {
+        console.log(`✅ ${description}`);
+        testResults.push(true);
+      } else {
+        console.log(`❌ ${description}`);
+        testResults.push(false);
+      }
     }
 
-    if (add(0, 0) === 0) {
-      console.log("✅ PASS: add(0, 0) == 0");
-      results.push(true);
-    } else {
-      console.log("❌ FAIL: add(0, 0) != 0");
-      results.push(false);
-    }
+    assert(signup("Atheer", "atheer@example.com", "123", "0500000000") === "Signup successful!", "Signup with new user");
 
-    if (results.every(Boolean)) {
-      console.log("✅✅✅ ALL TESTS PASSED");
-    } else {
-      console.log("❌❌❌ SOME TESTS FAILED");
-      process.exit(1); // causes GitHub Actions to fail if tests fail
-    }
-  }
 
-  runTests();
 </script>
 
 
