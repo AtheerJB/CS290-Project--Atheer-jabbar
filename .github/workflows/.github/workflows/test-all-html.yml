@@ -1,0 +1,34 @@
+name: Test All HTML Files
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Run test scripts in all HTML files
+      run: |
+        echo "Running functional tests..."
+        for file in *.html; do
+          echo "📂 Testing $file"
+          sed -n '/<script id="test-script">/,/<\/script>/p' "$file" | sed '1d;$d' > test.js
+          if [ -s test.js ]; then
+            echo "▶ Running test from $file"
+            node test.js || exit 1
+          else
+            echo "⚠️ No test script found in $file"
+          fi
+        done
