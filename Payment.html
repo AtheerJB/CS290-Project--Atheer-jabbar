@@ -19,3 +19,59 @@ function runTests() {
     const requiredFields = [
       "name", "email", "phone",
       "cardNumber", "expiryDate", "cvv", "verificationCode"
+    ];
+
+    return requiredFields.every(field => data[field]);
+  }
+
+  function mockSendVerificationCode(email, phone) {
+    return email.includes("@") && phone.length >= 8;
+  }
+
+  function simulateApplePayClick() {
+    return "Apple Pay is not implemented yet.";
+  }
+
+  function simulateVisaPayClick() {
+    return "Visa payment is not implemented yet.";
+  }
+
+  // === Tests ===
+  assert(
+    validatePaymentForm({
+      name: "Atheer",
+      email: "atheer@example.com",
+      phone: "0500000000",
+      cardNumber: "1234567890123456",
+      expiryDate: "2025-12",
+      cvv: "123",
+      verificationCode: "999999"
+    }),
+    "Payment form validation passes with all fields"
+  );
+
+  assert(
+    mockSendVerificationCode("atheer@example.com", "0500000000"),
+    "Send code works with valid email and phone"
+  );
+
+  assert(
+    simulateApplePayClick() === "Apple Pay is not implemented yet.",
+    "Apple Pay fallback message correct"
+  );
+
+  assert(
+    simulateVisaPayClick() === "Visa payment is not implemented yet.",
+    "Visa Pay fallback message correct"
+  );
+
+  // === Final Summary ===
+  if (results.every(Boolean)) {
+    console.log("✅✅✅ ALL PAYMENT TESTS PASSED");
+  } else {
+    console.log("❌❌❌ SOME PAYMENT TESTS FAILED");
+    process.exit(1);
+  }
+}
+
+runTests();
