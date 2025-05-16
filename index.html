@@ -313,16 +313,15 @@
             }
         }
     </script>
-<script>
+<script id="test-script">
+  // Node.js-compatible test code
   function add(a, b) {
     return a + b;
   }
 
-  // Functional Tests
   function runTests() {
     const results = [];
 
-    // Sample test cases
     if (add(2, 3) === 5) {
       console.log("✅ PASS: add(2, 3) == 5");
       results.push(true);
@@ -339,17 +338,17 @@
       results.push(false);
     }
 
-    // Summary
-    if (results.every(r => r)) {
+    if (results.every(Boolean)) {
       console.log("✅✅✅ ALL TESTS PASSED");
     } else {
       console.log("❌❌❌ SOME TESTS FAILED");
-      process.exit(1); // force GitHub Actions to mark it as failed
+      process.exit(1); // causes GitHub Actions to fail if tests fail
     }
   }
 
   runTests();
 </script>
+
 
 </body>
 </html>
