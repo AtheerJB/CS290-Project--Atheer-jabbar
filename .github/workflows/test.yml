@@ -19,9 +19,11 @@ jobs:
         with:
           node-version: 18
 
-      - name: Run UI Tests
+      - name: Run All UI Test Scripts
         run: |
           echo "▶ Starting all tests..."
-          node tests/login.test.js
-          node tests/register.test.js
-          node tests/payment.test.js
+          
+          for file in tests/*.test.js; do
+            echo "🔍 Running $file"
+            node "$file" || exit 1
+          done
