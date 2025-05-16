@@ -1,27 +1,25 @@
-<script id="test-script">
-// PURE NODE.JS-COMPATIBLE TEST CODE ONLY
-function add(a, b) {
-  return a + b;
-}
+name: Functional Testing
 
-function runTests() {
-  const results = [];
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-  if (add(2, 3) === 5) {
-    console.log("✅ PASS: add(2, 3) == 5");
-    results.push(true);
-  } else {
-    console.log("❌ FAIL: add(2, 3) != 5");
-    results.push(false);
-  }
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-  if (results.every(r => r)) {
-    console.log("✅✅✅ ALL TESTS PASSED");
-  } else {
-    console.log("❌❌❌ SOME TESTS FAILED");
-    process.exit(1);
-  }
-}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-runTests();
-</script>
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Extract and Run Test Script
+        run: |
+          sed -n '/<script id="test-script">/,/<\/script>/p' index.html | sed '1d;$d' > test.js
+          node test.js
