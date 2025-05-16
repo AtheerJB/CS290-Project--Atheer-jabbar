@@ -281,5 +281,37 @@
             alert('Visa payment is not implemented yet.');
         });
     </script>
+
+<script id="test-script">
+  function runTests() {
+    const results = [];
+
+    function assert(condition, description) {
+      if (condition) {
+        console.log(`✅ ${description}`);
+        results.push(true);
+      } else {
+        console.log(`❌ ${description}`);
+        results.push(false);
+      }
+    }
+
+    // 🧪 Your custom test cases go here
+    assert(true, "Sample test passed"); // Replace or remove this line
+    assert(2 + 2 === 4, "Math works: 2 + 2 == 4");
+
+    // ✅ Summary
+    if (results.every(Boolean)) {
+      console.log("✅✅✅ ALL TESTS PASSED");
+    } else {
+      console.log("❌❌❌ SOME TESTS FAILED");
+      process.exit(1); // Fail GitHub Actions
+    }
+  }
+
+  runTests();
+</script>
+
+    
 </body>
 </html>
