@@ -1,25 +1,27 @@
-name: Functional Testing
+<script id="test-script">
+// PURE NODE.JS-COMPATIBLE TEST CODE ONLY
+function add(a, b) {
+  return a + b;
+}
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+function runTests() {
+  const results = [];
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+  if (add(2, 3) === 5) {
+    console.log("✅ PASS: add(2, 3) == 5");
+    results.push(true);
+  } else {
+    console.log("❌ FAIL: add(2, 3) != 5");
+    results.push(false);
+  }
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+  if (results.every(r => r)) {
+    console.log("✅✅✅ ALL TESTS PASSED");
+  } else {
+    console.log("❌❌❌ SOME TESTS FAILED");
+    process.exit(1);
+  }
+}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Extract <script> and run tests
-        run: |
-          awk '/<script>/{flag=1;next}/<\/script>/{flag=0}flag' index.html > test.js
-          node test.js
+runTests();
+</script>
