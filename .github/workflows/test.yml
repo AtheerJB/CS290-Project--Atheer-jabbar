@@ -1,4 +1,4 @@
-name: Functional Testing
+name: Test All HTML Files
 
 on:
   push:
@@ -19,7 +19,15 @@ jobs:
         with:
           node-version: 18
 
-      - name: Extract and Run Test Script
+      - name: Run functional test scripts from HTML files
         run: |
-          sed -n '/<script id="test-script">/,/<\/script>/p' index.html | sed '1d;$d' > test.js
-          node test.js
+          for file in *.html; do
+            echo "🔍 Checking $file"
+            sed -n '/<script id="test-script">/,/<\/script>/p' "$file" | sed '1d;$d' > test.js
+            if [ -s test.js ]; then
+              echo "▶ Running test from $file..."
+              node test.js || exit 1
+            else
+              echo "⚠️ No test found in $file"
+            fi
+          done
